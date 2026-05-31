@@ -19,7 +19,7 @@ async function enviarTelegram(mensaje) {
     console.log("Telegram response:", chat_id, data);
   }
 }
-}
+
 
 async function obtenerPrecioMinimo(url) {
   const browser = await chromium.launch({
