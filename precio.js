@@ -8,6 +8,10 @@ async function enviarTelegram(mensaje) {
     process.env.TELEGRAM_CHAT_ID_2
   ];
 
+  // 🔍 DEBUG CLAVE
+  console.log("CHAT_ID_1:", JSON.stringify(process.env.TELEGRAM_CHAT_ID));
+  console.log("CHAT_ID_2:", JSON.stringify(process.env.TELEGRAM_CHAT_ID_2));
+
   for (const chat_id of chatIds) {
     const res = await fetch(url, {
       method: 'POST',
