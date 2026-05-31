@@ -1,4 +1,3 @@
-require('dotenv').config();
 const { chromium } = require('playwright');
 
 async function enviarTelegram(mensaje) {
@@ -20,7 +19,7 @@ async function enviarTelegram(mensaje) {
 
 async function obtenerPrecioMinimo(url) {
   const browser = await chromium.launch({
-    headless: false
+    headless: true
   });
 
   try {
@@ -33,7 +32,7 @@ async function obtenerPrecioMinimo(url) {
 
     await page.getByRole('button', {
       name: 'Aceptar cookies y continuar'
-    }).click();
+    }).click().catch(() => {}); // evita crash si no aparece
 
     await page.waitForTimeout(5000);
 
@@ -67,7 +66,6 @@ Iberostar Bahia: USD ${precioBahia}
 Iberostar Praia do Forte: USD ${precioPraia}
 `;
 
-await enviarTelegram(mensaje);
-
+  await enviarTelegram(mensaje);
 
 })();
