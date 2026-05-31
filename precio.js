@@ -5,7 +5,7 @@ async function enviarTelegram(mensaje) {
 
   const chatIds = [
     process.env.TELEGRAM_CHAT_ID,
-    process.env.TELEGRAM_CHAT_ID_2S
+    process.env.TELEGRAM_CHAT_ID_2
   ];
 
   for (const chat_id of chatIds) {
