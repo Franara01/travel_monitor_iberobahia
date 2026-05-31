@@ -9,17 +9,16 @@ async function enviarTelegram(mensaje) {
   ];
 
   for (const chat_id of chatIds) {
-    await fetch(url, {
+    const res = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        chat_id,
-        text: mensaje
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id, text: mensaje })
     });
+
+    const data = await res.json();
+    console.log("Telegram response:", chat_id, data);
   }
+}
 }
 
 async function obtenerPrecioMinimo(url) {
