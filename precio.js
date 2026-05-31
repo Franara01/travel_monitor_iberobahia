@@ -3,18 +3,23 @@ const { chromium } = require('playwright');
 async function enviarTelegram(mensaje) {
   const url = `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`;
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      chat_id: process.env.TELEGRAM_CHAT_ID,
-      text: mensaje
-    })
-  });
+  const chatIds = [
+    process.env.TELEGRAM_CHAT_ID,
+    process.env.TELEGRAM_CHAT_ID_2S
+  ];
 
-  return response.json();
+  for (const chat_id of chatIds) {
+    await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        chat_id,
+        text: mensaje
+      })
+    });
+  }
 }
 
 async function obtenerPrecioMinimo(url) {
@@ -60,7 +65,7 @@ async function obtenerPrecioMinimo(url) {
   const precioPraia = await obtenerPrecioMinimo(urlPraia);
 
   const mensaje = `
-🏨 Monitoreo Brasil
+🏨 Precios Brasil - 04/03/2027 al 14/03/2027
 
 Iberostar Bahia: USD ${precioBahia}
 Iberostar Praia do Forte: USD ${precioPraia}
